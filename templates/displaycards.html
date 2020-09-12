@@ -1,0 +1,41 @@
+{%extends 'newhomepage.html' %}
+{% block content %}
+  <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+<body>
+  <div class="home_header">
+    <h1 class="text-center">FlashTime</h1>
+  </div>
+  <img src="{{url_for('static', filename='home_background.png')}}">
+  <h1 class="subtitle">My cards</h1>
+
+    <div class="flash_card">
+        <div class="card mx-auto" style="width: 18rem; height: 13rem; margin-left:40px">
+          <div class="card-body" id='card-body'>
+          <span class="badge badge-pill badge-primary mx-auto">{{card_num + 1}}</span>
+          {% if current_state == 1 %}
+          <h5 class="card-title text-center" style="padding:25px">{{card_questions[card_num][0]}}</h5>
+          {% endif %}
+          {% if current_state == 0 %}
+          <h5 class="card-title text-center" style="padding:25px">{{card_answers[card_num][0]}}</h5> 
+          {% endif %} 
+          <div style="margin-left:40px; margin-top:10px">
+            {% if card_num != 0 %}
+            <a href="{{url_for('nextCard', current_state=current_state, current_user_id=current_user_id, card_num=card_num, current_deck=current_deck, id='back')}}" method="POST" type="button" class="btn btn-danger">Back</a>
+            {% endif %}
+            <a href="{{url_for('nextCard', current_state=current_state,card_num=card_num, current_user_id=current_user_id, current_deck=current_deck, id='flip')}}" method="POST" name="flip" type="button" class="btn btn-warning">Flip</a>
+            {% if card_num+1 != card_id_num[0] %}
+            <a href="{{url_for('nextCard', card_num=card_num, current_state=current_state, current_user_id=current_user_id, current_deck=current_deck, id='next')}}" method="POST" type="button" name="next" class="btn btn-success">Next</a>
+            {% endif %}
+          </div>
+        </div>
+        </div>
+      </div>
+        <br>
+        <a href="{{url_for('loginpage', current_user_id=current_user_id)}}" method="POST" name="backToHome" class="btn btn-warning" id="back" style="margin-left: 575px">Back to Home</a>
+  {% endblock %}
+
+
+
+
+
+

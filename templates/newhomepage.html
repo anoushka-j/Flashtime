@@ -1,0 +1,19 @@
+{%extends 'index.html' %}
+{%block content%}
+<body>
+  <div class="home_header">
+    <h1 class="text-center">FlashTime</h1>
+  </div>
+  <img src="{{url_for('static', filename='home_background.png')}}">
+
+  <h1 class="subtitle">My decks</h1>
+
+  </div>
+  {%block decks%}
+  {%endblock%}
+  <div class="text-center" style="margin:16px">
+    <a href="{{ url_for('decks', current_user_id=current_user_id)}}" id="makeNewDeck" class="btn btn-primary" type="button">+ Make New Deck</a>
+  </div>
+
+</body>
+{%endblock%}

@@ -1,0 +1,33 @@
+{%extends 'newhomepage.html' %}
+
+{% block decks%}
+<div class="row">
+
+{% for deck_id in user_deck_ids %} 
+  {% for deck in deck_id %}
+  <div class="col-sm-4">
+  <div class="card" style="width:18rem; margin: 20px;">
+      <div class="card-body text-center" style="float:left">
+        <a href="{{url_for('loginpage', current_user_id=current_user_id, user_deck_ids=user_deck_ids, deck_names=deck_names, deck_descs=deck_descs, warning='True')}}
+        "><span style="float:right" class="badge badge-pill badge-danger">X</span></a>
+        {% for deck_name in deck_names[deck-1]%}
+        <h5><a href="{{url_for('displaycards', current_deck=deck, current_user_id=current_user_id[0], badge_type='')}}">{{deck_name}}</a>
+        </h5>
+        {% endfor%}
+        {% for deck_desc in deck_descs[deck-1]%}
+        <p class="card-text">{{deck_desc}}</p>
+        {% endfor%}
+    </div>
+  </div>
+  </div>
+  {%endfor%}
+  {%endfor%}
+</div>
+{% if warning == 'True'%}
+<div class="alert alert-danger" role="alert">
+  This is a danger alert—check it out!
+</div>
+{%endif%}
+{% endblock %}
+
+  
